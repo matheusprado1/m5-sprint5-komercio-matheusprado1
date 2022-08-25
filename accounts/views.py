@@ -7,8 +7,7 @@ from rest_framework import generics, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from accounts.permissions import IsAccountOwner, IsAdminUser
-
+from .permissions import IsAccountOwner, IsAdminUser
 from .models import Account
 from .serializers import AccountSerializer, DeactivateAccountSerializer, LoginSerializer
 

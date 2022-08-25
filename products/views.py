@@ -1,7 +1,6 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 
-
 from products.permissions import IsProductOwner, IsSeller
 
 from .models import Product

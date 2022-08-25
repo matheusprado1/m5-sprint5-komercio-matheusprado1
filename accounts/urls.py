@@ -1,11 +1,11 @@
 from django.urls import path
 
-from .views import AccountManagementView, AccountRetriveUpdateDestroyAPIView, AccountView, RetrieveAccountView, UserLoginView
+from . import views
 
 urlpatterns = [
-    path("accounts/", AccountView.as_view()),
-    path("accounts/<uuid:pk>/", AccountRetriveUpdateDestroyAPIView.as_view()),
-    path("accounts/<uuid:pk>/management/", AccountManagementView.as_view()),
-    path("accounts/newest/<int:num>/", RetrieveAccountView.as_view()),
-    path("login/", UserLoginView.as_view()),
+    path("accounts/", views.AccountView.as_view()),
+    path("accounts/<uuid:pk>/", views.AccountRetriveUpdateDestroyAPIView.as_view()),
+    path("accounts/<uuid:pk>/management/", views.AccountManagementView.as_view()),
+    path("accounts/newest/<int:num>/", views.RetrieveAccountView.as_view()),
+    path("login/", views.UserLoginView.as_view()),
 ]
