@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import dotenv
 
 from pathlib import Path
 
@@ -19,8 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-import dotenv
 
 dotenv.load_dotenv()
 
@@ -56,6 +55,12 @@ MY_APPS = [
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
+
+# paginação
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 2,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -93,16 +98,22 @@ WSGI_APPLICATION = 'komercio.wsgi.application'
 
 # alteração para usar o postgres
 DATABASES = {
-    'default':{
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':os.getenv('POSTGRES_DB'),
-        'USER':os.getenv('POSTGRES_USER'),
-        'PASSWORD':os.getenv('POSTGRES_PASSWORD'),
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'PORT': os.getenv('PORT'),
+        'TEST': {
+            'DEPENDENCIES': ['dbsqlite'],
+        }
     },
-    'test': {
+    'dbsqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+            'DEPENDENCIES': [],
+        }
     }
 }
 
