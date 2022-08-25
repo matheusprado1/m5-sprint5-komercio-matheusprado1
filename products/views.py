@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from products.permissions import IsProductOwner
+
+from products.permissions import IsProductOwner, IsSeller
 
 from .models import Product
 from .serializers import ProductDetailSerializer, ProductSerializer
@@ -11,7 +11,7 @@ from .mixins import SerializerByMixin
 
 class ProductView(SerializerByMixin, generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsSeller]
 
     queryset = Product.objects.all()
     serializer_map = {
