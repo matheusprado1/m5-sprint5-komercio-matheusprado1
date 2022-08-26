@@ -30,7 +30,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< Updated upstream
 ALLOWED_HOSTS = ['komercio.herokuapp.com', 'localhost']
+=======
+ALLOWED_HOSTS = ['komercio.heroku.com', 'localhost']
+>>>>>>> Stashed changes
 
 
 # Application definition
